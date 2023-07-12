@@ -8,4 +8,4 @@ What to expect in this project?
   5. Average number of transactions per user that made a purchase over time
   6. Average amount of money spent per session
   7. Cohort map from product view to addtocart to purchase
-Please refer to this dataset: console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1sbigquery-public-data!2sgoogle_analytics_sample!3sga_sessions_20170801 
+     

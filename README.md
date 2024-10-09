@@ -257,3 +257,44 @@ group by time_type, time, source;
 
 ![Average of Revenue by Time](Picture2.png)
 
+## 6. Average number of pageviews by purchaser type (purchasers vs non-purchasers) in June, July 2017
+```
+with purchaser_data as(
+  select
+      format_date("%Y%m",parse_date("%Y%m%d",date)) as month,
+      (sum(totals.pageviews)/count(distinct fullvisitorid)) as avg_pageviews_purchase,
+  from `bigquery-public-data.google_analytics_sample.ga_sessions_2017*`
+    ,unnest(hits) hits
+    ,unnest(product) product
+  where _table_suffix between '0601' and '0731'
+  and totals.transactions>=1
+  and product.productRevenue is not null
+  group by month
+),
+
+non_purchaser_data as(
+  select
+      format_date("%Y%m",parse_date("%Y%m%d",date)) as month,
+      sum(totals.pageviews)/count(distinct fullvisitorid) as avg_pageviews_non_purchase,
+  from `bigquery-public-data.google_analytics_sample.ga_sessions_2017*`
+      ,unnest(hits) hits
+    ,unnest(product) product
+  where _table_suffix between '0601' and '0731'
+  and totals.transactions is null
+  and product.productRevenue is null
+  group by month
+)
+
+select
+    pd.*,
+    avg_pageviews_non_purchase
+from purchaser_data pd
+left join non_purchaser_data using(month)
+order by pd.month;
+```
+| Month | Avg Pageviews Purchase | Avg Pageviews Non-Purchase |
+|-------|------------------------|----------------------------|
+| June  | 94.02                  | 316.87                     |
+| July  | 124.24                 | 334.06                     |
+
+![Image](Picture3.png)

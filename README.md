@@ -61,9 +61,9 @@ ORDER BY 1;
 ## Sales Data by Month 
 | Month  | Visits | Pageviews | Transactions |
 |--------|--------|-----------|--------------|
-| 201701 | 64694  | 257708    | 713          |
-| 201702 | 62192  | 233373    | 733          |
-| 201703 | 69931  | 259522    | 993          |
+| January | 64694  | 257708    | 713          |
+| February | 62192  | 233373    | 733          |
+| March | 69931  | 259522    | 993          |
 
 # 4. Bounce rate per traffic source in July 2017 (Bounce_rate = num_bounce/total_visit) (order by total_visit DESC)
 ```

@@ -56,7 +56,7 @@ WHERE _TABLE_SUFFIX BETWEEN '0101' AND '0331'
 GROUP BY 1
 ORDER BY 1;
 ```
-
+![Sales Data Bar Chart](graph_1.png)
 
 ## Sales Data by Month 
 | Month  | Visits | Pageviews | Transactions |
@@ -254,4 +254,6 @@ group by time_type, time, source;
 | month     | 201706| l.facebook.com       | 12.48    |
 | month     | 201706| mail.aol.com         | 64.85    |
 | month     | 201706| search.myway.com     | 105.94   |
+
+![Average of Revenue by Time](Picture2.png)
 

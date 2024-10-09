@@ -57,6 +57,30 @@ ORDER BY 1;
 | February | 62192  | 233373    | 733          |
 | March | 69931  | 259522    | 993          |
 
+Based on the result of the total visit, page view and transaction for the first 3 months in 2017, we oberve that:
+- Visit trends: There was a decline in visits from January (64,694) to February (62,192) but an increase in March (69,931), indicating potential seasonal or promotional effects in March.
+- Page View trends: Pageviews followed a similar trend as visits, with January having the highest (257,708) and February the lowest (233,373). However, March saw an increase in pageviews alongside the increase in visits, suggesting better engagement or content.
+- Transactions: Transactions increased significantly from February (733) to March (993), which is a positive sign. This indicates that the increased visits and pageviews in March translated effectively into transactions.
+
+We can also calculate the conversion rate by this formula: 100 * (transaction/visits) 
+- January: conversion rate ~ 1.10%
+- February: conversion rate ~ 1.18%
+- March: conversion rate ~ 1.42%
+
+Recommendations: 
+1. Marketing Strategies
+- The increase in March suggests that specific campaigns or promotions may have driven more traffic and conversions. We can analyze what have done well in March and replicate similar strategies in the upcoming months.
+
+2. Optimize User Experience
+- Given that pageviews are relatively high compared to visits, focus on improving the user journey on the site, we need to ensure that the website is intuitive and content is easily accessible to maintain engagement.
+
+3. Encourage Repeat Visits
+- To counter the drop in visits from January to February, we may implement strategies to encourage repeat visits, such as loyalty programs or personalized email marketing targeting users who visited but did not purchase.
+
+4. A/B Testing
+-  We might consider conducting A/B tests on landing pages and checkout processes to optimize conversion rates further. Small adjustments can significantly impact the overall transactions.
+
+
 # 4. Bounce rate per traffic source in July 2017 (Bounce_rate = num_bounce/total_visit) (order by total_visit DESC)
 ```
 SELECT trafficSource.source as source,  

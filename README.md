@@ -45,7 +45,7 @@ https://support.google.com/analytics/answer/3437719?hl=en
 | `hits.product.productSKU`         | STRING    | Product SKU.                                                                                                                                                                                                                           |
 | `hits.product.v2ProductName`      | STRING    | Product Name.                                                                                                                                                                                                                          |
 # 3. Calculate total visit, pageview, transaction for Jan, Feb and March 2017 (order by month)
-` SELECT
+```SELECT
   format_date("%Y%m", parse_date("%Y%m%d", date)) as month,
   SUM(totals.visits) AS visits,
   SUM(totals.pageviews) AS pageviews,
@@ -53,7 +53,7 @@ https://support.google.com/analytics/answer/3437719?hl=en
 FROM `bigquery-public-data.google_analytics_sample.ga_sessions_2017*`
 WHERE _TABLE_SUFFIX BETWEEN '0101' AND '0331'
 GROUP BY 1
-ORDER BY 1; `
+ORDER BY 1;```
 
 
 ## Sales Data by Month 

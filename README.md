@@ -298,3 +298,165 @@ order by pd.month;
 | July  | 124.24                 | 334.06                     |
 
 ![Image](picture3.png)
+
+## 7. Average number of transactions per user that made a purchase in July 2017
+```
+select
+    format_date("%Y%m",parse_date("%Y%m%d",date)) as month,
+    sum(totals.transactions)/count(distinct fullvisitorid) as Avg_total_transactions_per_user
+from `bigquery-public-data.google_analytics_sample.ga_sessions_201707*`
+    ,unnest (hits) hits,
+    unnest(product) product
+where  totals.transactions>=1
+and totals.totalTransactionRevenue is not null
+and product.productRevenue is not null
+group by month;
+```
+| Month   | Avg Total Transactions Per User |
+|---------|-------------------------------|
+| July  | 4.16                   |
+
+## 8. Average amount of money spent per session. Only include purchaser data in July 2017
+```
+select
+    format_date("%Y%m",parse_date("%Y%m%d",date)) as month,
+    ((sum(product.productRevenue)/sum(totals.visits))/power(10,6)) as avg_revenue_by_user_per_visit
+from `bigquery-public-data.google_analytics_sample.ga_sessions_201707*`
+  ,unnest(hits) hits
+  ,unnest(product) product
+where product.productRevenue is not null
+group by month;
+```
+| Month   | Avg Revenue by User Per Visit |
+|---------|-------------------------------|
+| July  | 43.85                  |
+
+
+## 9. Other products purchased by customers who purchased product "YouTube Men's Vintage Henley" in July 2017. Output should show product name and the quantity was ordered.
+```
+select
+    product.v2productname as other_purchased_product,
+    sum(product.productQuantity) as quantity
+from `bigquery-public-data.google_analytics_sample.ga_sessions_201707*`,
+    unnest(hits) as hits,
+    unnest(hits.product) as product
+where fullvisitorid in (select distinct fullvisitorid
+                        from `bigquery-public-data.google_analytics_sample.ga_sessions_201707*`,
+                        unnest(hits) as hits,
+                        unnest(hits.product) as product
+                        where product.v2productname = "YouTube Men's Vintage Henley"
+                        and product.productRevenue is not null)
+and product.v2productname != "YouTube Men's Vintage Henley"
+and product.productRevenue is not null
+group by other_purchased_product
+order by quantity desc;
+
+with buyer_list as(
+    SELECT
+        distinct fullVisitorId
+    FROM `bigquery-public-data.google_analytics_sample.ga_sessions_201707*`
+    , UNNEST(hits) AS hits
+    , UNNEST(hits.product) as product
+    WHERE product.v2ProductName = "YouTube Men's Vintage Henley"
+    AND totals.transactions>=1
+    AND product.productRevenue is not null
+)
+
+SELECT
+  product.v2ProductName AS other_purchased_products,
+  SUM(product.productQuantity) AS quantity
+FROM `bigquery-public-data.google_analytics_sample.ga_sessions_201707*`
+, UNNEST(hits) AS hits
+, UNNEST(hits.product) as product
+JOIN buyer_list using(fullVisitorId)
+WHERE product.v2ProductName != "YouTube Men's Vintage Henley"
+ and product.productRevenue is not null
+GROUP BY other_purchased_products
+ORDER BY quantity DESC;
+```
+| Other Purchased Products                                     | Quantity |
+|-------------------------------------------------------------|----------|
+| Google Sunglasses                                           | 20       |
+| Google Women's Vintage Hero Tee Black                       | 7        |
+| SPF-15 Slim & Slender Lip Balm                              | 6        |
+| Google Women's Short Sleeve Hero Tee Red Heather            | 4        |
+| Google Men's Short Sleeve Badge Tee Charcoal                | 3        |
+| YouTube Men's Fleece Hoodie Black                            | 3        |
+| Red Shine 15 oz Mug                                        | 2        |
+| Google Men's Short Sleeve Hero Tee Charcoal                 | 2        |
+| YouTube Twill Cap                                          | 2        |
+| 22 oz YouTube Bottle Infuser                               | 2        |
+| Android Men's Vintage Henley                                | 2        |
+| Google Doodle Decal                                        | 2        |
+| Recycled Mouse Pad                                         | 2        |
+| Android Women's Fleece Hoodie                               | 2        |
+| Android Wool Heather Cap Heather/Black                      | 2        |
+| Crunch Noise Dog Toy                                       | 2        |
+| YouTube Custom Decals                                      | 1        |
+| Google 5-Panel Cap                                         | 1        |
+| Google Toddler Short Sleeve T-shirt Grey                   | 1        |
+| Google Twill Cap                                           | 1        |
+| Google Men's Performance Full Zip Jacket Black              | 1        |
+| 26 oz Double Wall Insulated Bottle                         | 1        |
+| Android Men's Vintage Tank                                  | 1        |
+| Google Slim Utility Travel Bag                              | 1        |
+| Google Men's Pullover Hoodie Grey                           | 1        |
+| Google Men's Vintage Badge Tee White                        | 1        |
+| YouTube Women's Short Sleeve Hero Tee Charcoal             | 1        |
+| Google Men's 100% Cotton Short Sleeve Hero Tee Red         | 1        |
+| Google Men's Zip Hoodie                                     | 1        |
+| YouTube Men's Short Sleeve Hero Tee White                  | 1        |
+| Android Men's Short Sleeve Hero Tee White                   | 1        |
+| Android Men's Pep Rally Short Sleeve Tee Navy               | 1        |
+| YouTube Men's Short Sleeve Hero Tee Black                   | 1        |
+| Four Color Retractable Pen                                  | 1        |
+| Google Laptop and Cell Phone Stickers                       | 1        |
+| Google Men's Long & Lean Tee Charcoal                       | 1        |
+| Google Men's Bike Short Sleeve Tee Charcoal                 | 1        |
+| Android Sticker Sheet Ultra Removable                       | 1        |
+| Google Men's Long Sleeve Raglan Ocean Blue                  | 1        |
+| Google Men's Vintage Badge Tee Black                         | 1        |
+| Google Men's Long & Lean Tee Grey                           | 1        |
+| Google Women's Long Sleeve Tee Lavender                      | 1        |
+| 8 pc Android Sticker Sheet                                   | 1        |
+| YouTube Women's Short Sleeve Tri-blend Badge Tee Charcoal   | 1        |
+| YouTube Hard Cover Journal                                   | 1        |
+| Android BTTF Moonshot Graphic Tee                           | 1        |
+| Google Men's Airflow 1/4 Zip Pullover Black                 | 1        |
+| YouTube Men's Long & Lean Tee Charcoal                      | 1        |
+| Google Men's Performance 1/4 Zip Pullover Heather/Black     | 1        |
+| Android Men's Short Sleeve Hero Tee Heather                  | 1        |
+
+![Image](product.png)
+
+## 10. Calculate cohort map from product view to addtocart to purchase in Jan, Feb and March 2017. 
+```
+with product_data as(
+select
+    format_date('%Y%m', parse_date('%Y%m%d',date)) as month,
+    count(CASE WHEN eCommerceAction.action_type = '2' THEN product.v2ProductName END) as num_product_view,
+    count(CASE WHEN eCommerceAction.action_type = '3' THEN product.v2ProductName END) as num_add_to_cart,
+    count(CASE WHEN eCommerceAction.action_type = '6' and product.productRevenue is not null THEN product.v2ProductName END) as num_purchase
+FROM `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+,UNNEST(hits) as hits
+,UNNEST (hits.product) as product
+where _table_suffix between '20170101' and '20170331'
+and eCommerceAction.action_type in ('2','3','6')
+group by month
+order by month
+)
+
+select
+    *,
+    round(num_add_to_cart/num_product_view * 100, 2) as add_to_cart_rate,
+    round(num_purchase/num_product_view * 100, 2) as purchase_rate
+from product_data;
+```
+| Month  | Num Product View | Num Add to Cart | Num Purchase | Add to Cart Rate | Purchase Rate |
+|--------|------------------|-----------------|--------------|------------------|---------------|
+| Jan    | 25787            | 7342            | 2143         | 28.47%           | 8.31%         |
+| Feb    | 21489            | 7360            | 2060         | 34.25%           | 9.59%         |
+| Mar    | 23549            | 8782            | 2977         | 37.29%           | 12.64%        |
+
+![Image](rate.png)
+

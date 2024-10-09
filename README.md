@@ -8,8 +8,22 @@ What to expect in this project?
   5. Average number of transactions per user that made a purchase over time
   6. Average amount of money spent per session
   7. Cohort map from product view to addtocart to purchase
+
+# 1. Introduction and Motivation
+This project focuses on analyzing sales trends at a fictional company by examining key performance metrics derived from the BigQuery google_analytics_sample dataset. The analysis covers various aspects of user behavior, including total visits, bounce rate, and revenue attributed to different traffic sources. By exploring these metrics, we aim to uncover patterns and insights that drive user engagement and sales performance.
+
+The project highlights several key analyses:
+
+Total visits, pageviews, and transactions over time
+Bounce rate per traffic source over time
+Revenue distribution by traffic source
+Average number of pageviews by purchaser type over time
+Average transactions per user that made a purchase
+Average amount of money spent per session
+A cohort analysis mapping the journey from product view to "add to cart" and eventual purchase
+Through this analysis, we seek to provide actionable insights into customer behavior and sales trends, offering a comprehensive view of the company's performance across various traffic sources and user types.
      
-# 1. Read and explain dataset
+# 2. Read and explain dataset
 https://support.google.com/analytics/answer/3437719?hl=en
 
 | Field Name                       | Data Type | Description                                                                                                                                                                                                                           |
@@ -30,4 +44,21 @@ https://support.google.com/analytics/answer/3437719?hl=en
 | `hits.product.productRevenue`     | INTEGER   | The revenue of the product, expressed as the value passed to Analytics multiplied by 10^6 (e.g., 2.40 would be given as 2400000).                                                                                                       |
 | `hits.product.productSKU`         | STRING    | Product SKU.                                                                                                                                                                                                                           |
 | `hits.product.v2ProductName`      | STRING    | Product Name.                                                                                                                                                                                                                          |
+# 3. Calculate total visit, pageview, transaction for Jan, Feb and March 2017 (order by month)
+SELECT
+  format_date("%Y%m", parse_date("%Y%m%d", date)) as month,
+  SUM(totals.visits) AS visits,
+  SUM(totals.pageviews) AS pageviews,
+  SUM(totals.transactions) AS transactions,
+FROM `bigquery-public-data.google_analytics_sample.ga_sessions_2017*`
+WHERE _TABLE_SUFFIX BETWEEN '0101' AND '0331'
+GROUP BY 1
+ORDER BY 1;
+
+## Sales Data by Month 
+| Month  | Visits | Pageviews | Transactions |
+|--------|--------|-----------|--------------|
+| 201701 | 64694  | 257708    | 713          |
+| 201702 | 62192  | 233373    | 733          |
+| 201703 | 69931  | 259522    | 993          |
 

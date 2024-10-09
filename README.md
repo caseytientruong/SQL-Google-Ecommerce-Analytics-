@@ -176,3 +176,82 @@ ORDER BY total_visits DESC;
 | google.com.br                        | 1            |                     |                 |
 | suche.t-online.de                    | 1            | 1                   | 100.00          |
 
+# 5. Revenue by traffic source by week, by month in June 2017
+To calculate revenue, use productRevenue
+
+```
+with get_data as
+(select *, parse_date('%Y%m%d', date) as month
+from `bigquery-public-data.google_analytics_sample.ga_sessions_201706*`
+)
+
+select 'month' as time_type,
+        format_date('%Y%m', month) as time,
+        trafficSource.source as source,
+        sum(productRevenue / 1000000)  as revenue 
+from get_data,
+UNNEST (hits) hits,
+UNNEST (hits.product) product
+where productRevenue is not null   
+group by time_type, time, source
+UNION ALL 
+select 'week' as time_type,
+        format_date('%Y%W', month) as time,
+        trafficSource.source as source,
+        sum(productRevenue / 1000000)  as revenue 
+from get_data,
+UNNEST (hits) hits,
+UNNEST (hits.product) product
+where productRevenue is not null 
+group by time_type, time, source;
+```
+
+| Time Type | Time  | Source              | Revenue  |
+|-----------|-------|---------------------|----------|
+| week      | 201726| google               | 5330.57  |
+| week      | 201726| (direct)             | 14914.81 |
+| week      | 201722| google               | 2119.39  |
+| week      | 201722| sites.google.com     | 13.98    |
+| week      | 201725| (direct)             | 27295.32 |
+| week      | 201725| google               | 1006.10  |
+| week      | 201723| dfa                  | 1145.28  |
+| week      | 201724| bing                 | 13.98    |
+| week      | 201724| dealspotr.com        | 72.95    |
+| week      | 201726| groups.google.com    | 63.37    |
+| week      | 201724| dfa                  | 2341.56  |
+| week      | 201724| mail.google.com      | 2486.86  |
+| week      | 201726| yahoo                | 20.39    |
+| week      | 201724| l.facebook.com       | 12.48    |
+| week      | 201725| sites.google.com     | 25.19    |
+| week      | 201725| mail.aol.com         | 64.85    |
+| week      | 201725| mail.google.com      | 76.27    |
+| week      | 201725| groups.google.com    | 38.59    |
+| week      | 201723| chat.google.com      | 74.03    |
+| month     | 201706| dealspotr.com        | 72.95    |
+| month     | 201706| yahoo                | 20.39    |
+| month     | 201706| chat.google.com      | 74.03    |
+| week      | 201726| dfa                  | 3704.74  |
+| week      | 201722| (direct)             | 6888.90  |
+| week      | 201722| dfa                  | 1670.65  |
+| week      | 201723| (direct)             | 17325.68 |
+| week      | 201724| (direct)             | 30908.91 |
+| week      | 201724| google               | 9217.17  |
+| week      | 201723| youtube.com          | 16.99    |
+| week      | 201725| phandroid.com        | 52.95    |
+| week      | 201725| google.com           | 23.99    |
+| week      | 201723| google               | 1083.95  |
+| week      | 201723| search.myway.com     | 105.94   |
+| month     | 201706| google               | 18757.18 |
+| month     | 201706| dfa                  | 8862.23  |
+| month     | 201706| sites.google.com     | 39.17    |
+| month     | 201706| youtube.com          | 16.99    |
+| month     | 201706| phandroid.com        | 52.95    |
+| month     | 201706| google.com           | 23.99    |
+| month     | 201706| groups.google.com    | 101.96   |
+| month     | 201706| (direct)             | 97333.62 |
+| month     | 201706| bing                 | 13.98    |
+| month     | 201706| mail.google.com      | 2563.13  |
+| month     | 201706| l.facebook.com       | 12.48    |
+| month     | 201706| mail.aol.com         | 64.85    |
+| month     | 201706| search.myway.com     | 105.94   |
+

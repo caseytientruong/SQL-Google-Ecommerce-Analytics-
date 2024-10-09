@@ -192,6 +192,22 @@ ORDER BY total_visits DESC;
 | google.com.br                        | 1            |                     |                 |
 | suche.t-online.de                    | 1            | 1                   | 100.00          |
 
+Based on the result of bounce rate per traffic source above, we observe that: 
+
+- High bounce rates source: The highest bounce rate observed was from youtube.com (66.73%) and m.facebook.com (64.28%). This indicates that users coming from these platforms may not find the content engaging enough or may not be the target audience.
+- Moderate bounce rates source: Sources like google (51.56%) and analytics.google.com (53.96%) have moderate bounce rates. This indicates that while some users are engaging with the site, a significant portion leaves without further interaction.
+- Low bounce rates source: reddit.com had the lowest bounce rate at 28.57%, indicating that visitors from this platform are likely more engaged with the content, which could suggest that the content aligns well with the interests of this audience.
+
+Recommendations:
+1. Optimize Content for High Bounce Sources
+- For sources with high bounce rates like youtube.com and m.facebook.com, we may consider reviewing the landing pages to ensure they match user expectations. We should focus on the content specifically to these audiences and include clear calls to action.
+
+2. Analyze User Behavior
+- We can implement user behavior tracking (e.g., heat maps, session recordings) to understand how users interact with the site. This data can provide insights into where users drop off and help improve the site’s navigation.
+
+3. Targeted Campaigns
+- For sources like reddit.com that have a lower bounce rate, we can consider creating targeted marketing campaigns to drive more traffic from this source, potentially leveraging community engagement tactics.
+
 # 5. Revenue by traffic source by week, by month in June 2017
 To calculate revenue, use productRevenue
 
@@ -273,6 +289,28 @@ group by time_type, time, source;
 
 ![Average of Revenue by Time](Picture2.png)
 
+Based on the results of Average Revenue above, we observe that: 
+
+1. Direct Traffic Dominance
+- The (direct) traffic source shows the highest revenue across all weeks in June 2017, with a peak revenue of $30,908.91. This indicates a strong brand presence or effective retention strategies that encourage users to return directly.
+
+2. Significant Contribution from Google
+- Google is consistently a top revenue source, especially in weeks 26 and 24, generating revenues of $5,330.57 and $9,217.17 respectively. This suggests effective SEO strategies or ad campaigns driving traffic to the site.
+
+3. Lower Revenue from Other Sources
+- Other traffic sources such as yahoo, bing, and dealspotr.com contribute minimally to overall revenue, with most generating revenues below $100. This indicates a potential area for improvement in attracting users from these channels.
+- Sources like phandroid.com and youtube.com generated low revenue (e.g., $52.95 and $16.99, respectively), suggesting they may not be core traffic drivers
+
+Recommendations:
+1. Optimize SEO and SEM for Google
+- We can continue optimizing SEO efforts and consider expanding pay-per-click (PPC) campaigns on Google to sustain and potentially increase revenue from this source.
+
+2. Evaluate Content Strategy
+- Assess the content and messaging used in traffic sources generating low revenue, such as youtube.com and dealspotr.com, to better align them with the audience's interests. We can create content that encourages deeper engagement
+
+3. Monitor and Analyze Revenue Trends
+- Set up regular monitoring of revenue trends by source to quickly identify fluctuations and adapt marketing strategies accordingly. This could involve using analytical tools to derive insights and make data-driven decisions.
+
 ## 6. Average number of pageviews by purchaser type (purchasers vs non-purchasers) in June, July 2017
 ```
 with purchaser_data as(
@@ -314,6 +352,21 @@ order by pd.month;
 | July  | 124.24                 | 334.06                     |
 
 ![Image](picture3.png)
+
+Based on the result of page view between purchaser and non-purchase, we observe that:
+- In June, there is a big gap of page view between 2 groups, indicating that non-purchasers were more engaged with the website, viewing more pages on average than purchasers
+- In July, the gap between purchasers and non-purchasers narrowed slightly, but non-purchasers still viewed significantly more pages than purchasers
+
+Recommendations:
+1. Enhance Engagement for Purchasers
+- Consider offering exclusive promotions or discounts to purchasers who engage less with the website, encouraging them to return and view more pages.
+
+2. Improve Conversion Rates
+- Analyze Non-Purchaser Behavior: Investigate the reasons why non-purchasers are viewing more pages. It might be beneficial to understand their journey and identify any friction points that prevent them from making a purchase.
+- Optimize the Checkout Process: Ensure that the purchasing process is streamlined and user-friendly, as it might be causing drop-offs. A/B testing different layouts or processes could be beneficial.
+
+3. Monitor Trends Over Time:
+- Continue monitoring average pageviews by purchaser type over the coming months. Identifying trends early can help you adjust strategies to improve engagement and conversion rates.
 
 ## 7. Average number of transactions per user that made a purchase in July 2017
 ```
@@ -475,4 +528,27 @@ from product_data;
 | Mar    | 23549            | 8782            | 2977         | 37.29%           | 12.64%        |
 
 ![Image](rate.png)
+
+Based on the result of add to cart rate and purchase rate, we observe that:
+1. Add to cart rate
+- In January 2017, 28.47% of users who viewed products added them to their cart.
+- In February 2017, the Add to Cart rate increased to 34.25%, indicating a better conversion from product views to interest in purchasing.
+- March 2017 shows the highest Add to Cart rate at 37.29%, further improving over the previous months.
+This upward trend in Add to Cart rates suggests that the users in these months were increasingly interested in the products offered or that changes in user experience or marketing were driving better engagement.
+
+2. Purchase rate
+- January had an 8.31% conversion from Add to Cart to Purchase, which indicates a relatively low purchase commitment.
+- In February, this rate improved to 9.59%, showing slightly better purchase behavior after adding items to the cart.
+- March had the best performance, with a purchase rate of 12.64%. This suggests that users in March were more decisive or that incentives (such as discounts or promotions) might have encouraged higher conversions.
+
+3. Overall performance
+- From January to March, there is a noticeable improvement in both Add to Cart rates and Purchase rates.
+- March stands out with the highest number of product views, the highest Add to Cart and Purchase rates. This may be due to seasonality, product improvements, marketing campaigns, or promotions, resulting in better user behavior.
+
+Recommendations:
+1. Optimize Funnel from View to Cart
+- The increasing trend in Add to Cart rates is positive, but there is still room for improvement. Consider enhancing product descriptions, using urgency tactics (e.g., limited-time offers), and improving product page load speed to encourage more users to add items to their carts.
+
+2. Analyze March Success
+- Since March performed significantly better, it would be beneficial to analyze what specific actions or promotions took place during that month and try to replicate those strategies for future months
 

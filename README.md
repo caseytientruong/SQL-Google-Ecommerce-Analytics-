@@ -9,3 +9,5 @@ What to expect in this project?
   6. Average amount of money spent per session
   7. Cohort map from product view to addtocart to purchase
      
+# 1. Read and explain dataset
+https://support.google.com/analytics/answer/3437719?hl=en

@@ -297,4 +297,4 @@ order by pd.month;
 | June  | 94.02                  | 316.87                     |
 | July  | 124.24                 | 334.06                     |
 
-![Image](Picture3.png)
+![Image](picture3.png)

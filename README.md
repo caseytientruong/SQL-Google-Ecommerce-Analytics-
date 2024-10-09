@@ -1,6 +1,11 @@
 # SQL-Google-Ecommerce-Analytics-
-This project is to analyze sales trends at a fictional company by examining important metrics such as total visits, bounce rate, revenue by traffic source, etc. The dataset is taken from BigQuery - google_analytics_sample.
-What to expect in this project? 
+
+
+# 1. Introduction and Motivation
+This project focuses on analyzing sales trends at a fictional company by examining key performance metrics derived from the BigQuery google_analytics_sample dataset. The analysis covers various aspects of user behavior, including total visits, bounce rate, and revenue attributed to different traffic sources. By exploring these metrics, we aim to uncover patterns and insights that drive user engagement and sales performance.
+
+The project highlights several key analyses:
+
   1. Total visit, pageview, transaction over time
   2. Bounce rate per traffic source over time
   3. Revenue by traffic source over time
@@ -9,19 +14,6 @@ What to expect in this project?
   6. Average amount of money spent per session
   7. Cohort map from product view to addtocart to purchase
 
-# 1. Introduction and Motivation
-This project focuses on analyzing sales trends at a fictional company by examining key performance metrics derived from the BigQuery google_analytics_sample dataset. The analysis covers various aspects of user behavior, including total visits, bounce rate, and revenue attributed to different traffic sources. By exploring these metrics, we aim to uncover patterns and insights that drive user engagement and sales performance.
-
-The project highlights several key analyses:
-
-Total visits, pageviews, and transactions over time
-Bounce rate per traffic source over time
-Revenue distribution by traffic source
-Average number of pageviews by purchaser type over time
-Average transactions per user that made a purchase
-Average amount of money spent per session
-A cohort analysis mapping the journey from product view to "add to cart" and eventual purchase
-Through this analysis, we seek to provide actionable insights into customer behavior and sales trends, offering a comprehensive view of the company's performance across various traffic sources and user types.
      
 # 2. Read and explain dataset
 https://support.google.com/analytics/answer/3437719?hl=en

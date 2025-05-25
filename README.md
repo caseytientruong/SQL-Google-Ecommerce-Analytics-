@@ -48,7 +48,7 @@ WHERE _TABLE_SUFFIX BETWEEN '0101' AND '0331'
 GROUP BY 1
 ORDER BY 1;
 ```
-![Sales Data Bar Chart](graph_1.png)
+![Sales Data Bar Chart](Sales data by month.png)
 
 ## Sales Data by Month 
 | Month  | Visits | Pageviews | Transactions |
@@ -287,7 +287,7 @@ group by time_type, time, source;
 | month     | 201706| mail.aol.com         | 64.85    |
 | month     | 201706| search.myway.com     | 105.94   |
 
-![Average of Revenue by Time](Picture2.png)
+![Average of Revenue by Time](Average of revenue.png)
 
 Based on the results of Average Revenue above, we observe that: 
 
@@ -351,7 +351,7 @@ order by pd.month;
 | June  | 94.02                  | 316.87                     |
 | July  | 124.24                 | 334.06                     |
 
-![Image](picture3.png)
+![Image](Average of pageviews.png)
 
 Based on the result of page view between purchaser and non-purchase, we observe that:
 - In June, there is a big gap of page view between 2 groups, indicating that non-purchasers were more engaged with the website, viewing more pages on average than purchasers
@@ -496,7 +496,7 @@ ORDER BY quantity DESC;
 | Google Men's Performance 1/4 Zip Pullover Heather/Black     | 1        |
 | Android Men's Short Sleeve Hero Tee Heather                  | 1        |
 
-![Image](product.png)
+![Image](Products Purchased.png)
 
 ## 10. Calculate cohort map from product view to addtocart to purchase in Jan, Feb and March 2017. 
 ```
@@ -527,7 +527,7 @@ from product_data;
 | Feb    | 21489            | 7360            | 2060         | 34.25%           | 9.59%         |
 | Mar    | 23549            | 8782            | 2977         | 37.29%           | 12.64%        |
 
-![Image](rate.png)
+![Image](Custmer Behavior.png)
 
 Based on the result of add to cart rate and purchase rate, we observe that:
 1. Add to cart rate

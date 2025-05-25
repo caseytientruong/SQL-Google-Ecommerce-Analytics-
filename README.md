@@ -48,7 +48,7 @@ WHERE _TABLE_SUFFIX BETWEEN '0101' AND '0331'
 GROUP BY 1
 ORDER BY 1;
 ```
-![Sales Data Bar Chart](Sales data by month.png)
+![Sales Data Bar Chart](https://github.com/caseytientruong/SQL-Google-Ecommerce-Analytics-/blob/main/Sales%20data%20by%20month.png)
 
 ## Sales Data by Month 
 | Month  | Visits | Pageviews | Transactions |
